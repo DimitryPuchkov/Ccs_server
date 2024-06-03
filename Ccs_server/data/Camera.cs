@@ -16,18 +16,8 @@ namespace Ccs_server.data
         [Column("address", TypeName = "character varying")]
         public string Address { get; set; }
 
-        [Column("login", TypeName = "character varying")]
-        public string Login { get; set; }
-
-        [Column("password", TypeName = "character varying")]
-        public string Password { get; set; }
-
         [Column("user_id")]
         public int UserId { get; set; }
-
-
-        [Column("port")]
-        public int Port { get; set; }
 
         [Column("fbx1")]
         public int Fbx1 { get; set; }

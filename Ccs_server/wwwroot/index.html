@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>CCS</title>
+</head>
+<body>
+    <style>
+        .visitor_chart {
+            width: 800px;
+            height: 400px;
+        }
+
+        .add-camera-wrapper {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(0, 0, 0, 0.3);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 5;
+        }
+
+        .add-camera-container {
+            background-color: rgb(255, 255, 255);
+            display: block;
+            width: 76%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            padding: 50px;
+        }
+    </style>
+    <div id="userInfo" style="display:none;">
+        <p>Добро пожаловать <span id="userName"></span>!</p>
+        <input type="button" value="Выйти" id="logOut" />
+        <input type="button" value="Обновить" id="update" />
+        <input type="button" value="Добавить камеру" id="openAddCameraFormBtn" />
+    </div>
+    <div id="loginForm">
+        <h3>Вход на сайт</h3>
+        <p>
+            <label>Введите login</label><br />
+            <input type="text" id="login" />
+        </p>
+        <p>
+            <label>Введите пароль</label><br />
+            <input type="password" id="password" />
+        </p>
+        <input type="submit" id="submitLogin" value="Логин" />
+        <button id="registrationBtn">Зарегистрироваться</button>
+    </div>
+    <div id="registerForm" style="display:none;">
+        <h3>Регистрация</h3>
+        <p>
+            <label>Введите login</label><br />
+            <input type="text" id="registerlogin" />
+        </p>
+        <p>
+            <label>Введите Email</label><br />
+            <input type="text" id="registerEmail" />
+        </p>
+        <p>
+            <label>Введите пароль</label><br />
+            <input type="password" id="registerPassword" />
+        </p>
+        <input type="submit" id="submitRegister" value="Регистрация" />
+    </div>
+    <div class="add-camera-wrapper" id="addCameraWindow">
+        <div class="add-camera-container">
+            <h3>Добавить камеру</h3>
+            <p>
+                <label>Введите имя камеры</label>
+                <input type="text" id="name" /><br />
+                <label>Введите адрес камеры</label>
+                <input type="text" id="address" style="width: 400px;" /><br />
+                Введите координаты границ (координаты 4 точек относительно левого верхнего угла, первые 2 точки - концы первой границы, вториые 2 точки концы второй границы)
+                <br />
+                Первая граница:<br />
+                x1: <input type="text" id="fbx1" />
+                y1: <input type="text" id="fby1" /><br />
+
+                x2: <input type="text" id="fbx2" />
+                y2: <input type="text" id="fby2" /><br /><br />
+
+                Вторая граница:<br />
+                x1: <input type="text" id="sbx1" />
+                y1: <input type="text" id="sby1" /><br />
+
+                x2: <input type="text" id="sbx2" />
+                y2: <input type="text" id="sby2" /><br /><br />
+            </p>
+            <input type="submit" id="addCameraBtn" value="Добавить камеру" />
+        </div>
+
+    </div>
+    <div id="camerasContainer">
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./script.js"></script>
+
+</body>
+</html>

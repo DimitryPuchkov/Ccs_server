@@ -5,6 +5,7 @@ namespace Ccs_server.data
 {
     public class User
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
         [Key]
         public int Id { get; set; }
