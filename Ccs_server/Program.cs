@@ -10,7 +10,20 @@ using Nager.VideoStream;
 using System.Text;
 using System;
 using Microsoft.EntityFrameworkCore;
+using Ccs_server;
 
+
+
+List<TranslationHandler> translationHandlers = new List<TranslationHandler>();
+using (ApplicationContext db = new ApplicationContext())
+{
+    foreach (var camera in db.cameras.ToList())
+    {
+        var translation = new TranslationHandler(camera);
+        translation.Start();
+        translationHandlers.Add(translation);
+    }
+}
 
 var builder = WebApplication.CreateBuilder();
 builder.Services.AddDbContext<ApplicationContext>();
@@ -120,6 +133,9 @@ app.MapPost("/adddamera", (AddCameraData cameraData, ApplicationContext db) =>
         };
         db.cameras.Add(newCamera);
         db.SaveChanges();
+        var translation = new TranslationHandler(newCamera);
+        translation.Start();
+        translationHandlers.Add(translation);
         responseMessage = "Новая камера создана";
     }
     catch (Exception ex)
@@ -141,6 +157,9 @@ app.Map("/deletecam/{id}", [Authorize] (int id, HttpContext context, Application
     {
         var camera = db.cameras.First(c => c.Id == id);
         db.cameras.Remove(camera);
+        var translation = translationHandlers.First(t=>t.StreamCamera.Id == id);
+        translation.Stop();
+        translationHandlers.Remove(translation);
         db.SaveChanges();
         responseMessage = $"Камера {camera.Name} успешно удалена";
     }
